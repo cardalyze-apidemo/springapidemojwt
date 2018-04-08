@@ -2,15 +2,66 @@ package com.cardalyze.springapidemo.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.cardalyze.springapidemo.controller.RestaurantNotFoundException;
 import com.cardalyze.springapidemo.model.Entree;
 import com.cardalyze.springapidemo.model.Restaurant;
 
 @Component
-public class RestaurantService {
+public class RestaurantService implements RestaurantServiceInterface {
+	/* (non-Javadoc)
+	 * @see com.cardalyze.springapidemo.service.RestaurantServiceInterface#getAllRestaurants()
+	 */
+	@Override
+	public List<Restaurant>  getAllRestaurants()
+	{
+		return restaurants;
+	}
+	/* (non-Javadoc)
+	 * @see com.cardalyze.springapidemo.service.RestaurantServiceInterface#addRestaurant(com.cardalyze.springapidemo.model.Restaurant)
+	 */
+	@Override
+	public int addRestaurant(Restaurant restaurant)
+	{
+		restaurants.add(restaurant);
+		return restaurants.size();
+	}
+	/* (non-Javadoc)
+	 * @see com.cardalyze.springapidemo.service.RestaurantServiceInterface#getRestaurantById(int)
+	 */
+	@Override
+	public Restaurant getRestaurantById(int id)
+	{
+		for(Restaurant restaurant:restaurants)
+		{
+			if(restaurant.getId() == id) return restaurant;
+		}
+		throw new RestaurantNotFoundException("Restaurant Not Found by Id "+ id, null);
+	}
+	/* (non-Javadoc)
+	 * @see com.cardalyze.springapidemo.service.RestaurantServiceInterface#deleteRestaurantById(int)
+	 */
+	@Override
+	public void deleteRestaurantById(int id)
+	{
+		Restaurant restaurantToBeRemoved = null;
+		for(Restaurant restaurant:restaurants)
+		{
+			if(restaurant.getId() == id) restaurantToBeRemoved =  restaurant; break;
+		}
+		if(restaurantToBeRemoved == null)throw new RestaurantNotFoundException("Restaurant Not Found by Id "+ id, null);
+		else restaurants.remove(restaurantToBeRemoved);
+	}
+	
+	
+	/**
+	 * List of restaurant as static list
+	 * 
+	 */
 	private static List<Restaurant> restaurants = new ArrayList<>();
 
 	static {
@@ -46,11 +97,5 @@ public class RestaurantService {
 		restaurants.add(maharaja);
 		restaurants.add(friends);
 		
-	}
-
-	
-	public List<Restaurant>  getAllRestaurants()
-	{
-		return restaurants;
 	}
 }
