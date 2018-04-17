@@ -8,6 +8,10 @@ public class Entree {
 	
 	
 	
+	public Entree() {
+		super();
+	}
+
 	public Entree(int id, String name, String cuisine, boolean dinner) {
 		super();
 		this.id = id;
