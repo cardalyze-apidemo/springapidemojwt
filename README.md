@@ -12,23 +12,26 @@ Look inside the security package that adds the Filter and Authentication Manager
 This example adds to springapidemo project in this repo.
 The dependencies added are below
 
+```
 <!-- Add security -->
 <dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-security</artifactId>
 </dependency>
-
-
+```
+```
 <!-- spring and jwt -->
 <dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-jwt</artifactId>
 		    <version>1.0.9.RELEASE</version>
 </dependency>
-
+```
+```
 <!-- json web tokens of JWT -->
 <dependency>
     		<groupId>io.jsonwebtoken</groupId>
     		<artifactId>jjwt</artifactId>
     		<version>0.7.0</version>
 </dependency>
+```
